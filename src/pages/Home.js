@@ -2,11 +2,16 @@ import { Badge, Button, Grid, TextField, Typography } from '@mui/material'
 import { useContext, useEffect, useState } from 'react'
 import Tooltip from '@mui/material/Tooltip'
 
-import { Context } from '../App'
+import { Context } from '../store/appReducer'
 import doorIcon from '../assets/img/car-door.png'
 import chassisIcon from '../assets/img/chassis.png'
 import tiresIcon from '../assets/img/tires.png'
 import engineIcon from '../assets/img/engine.png'
+import {
+  HANDLE_CAR_PRODUCTION,
+  HANDLE_PRODUCTION,
+  HANDLE_STAFF,
+} from '../store/actions.constants'
 
 export default function Home() {
   const [state, dispatch] = useContext(Context)
@@ -15,7 +20,7 @@ export default function Home() {
 
   const { carsA, carsB, staff, tires, doors, chassis, engines } = state
   const onChange = (e) => {
-    dispatch({ type: 'handleStaff', payload: e.target.value })
+    dispatch({ type: HANDLE_STAFF, payload: e.target.value })
   }
 
   useEffect(() => {
@@ -34,7 +39,7 @@ export default function Home() {
 
   const handleProduction = (product) => {
     dispatch({
-      type: 'handleProduction',
+      type: HANDLE_PRODUCTION,
       payload: {
         name: product,
         value: getTotalCapacity(product),
@@ -52,7 +57,7 @@ export default function Home() {
     const deductableChassis =
       product === 'carsA' ? 1 * carAcapacity : 1 * carBcapacity
     dispatch({
-      type: 'handleCarProduction',
+      type: HANDLE_CAR_PRODUCTION,
       payload: {
         name: product,
         value: product === 'carsA' ? carAcapacity : carBcapacity,
@@ -90,7 +95,6 @@ export default function Home() {
         totalCapacity = i
       }
     }
-    // return totalCapacity
 
     model === 'carsA'
       ? setCarAcapacity(Math.round(Math.floor(totalCapacity)))
@@ -136,16 +140,12 @@ export default function Home() {
         style={{ marginTop: 40 }}
       >
         <Grid item xs={6} style={{ textAlign: 'center' }}>
-          <div>A model</div>
-          <Typography variant="h2" component="h2">
-            {carsA}
-          </Typography>
+          <Typography variant="h5">A model</Typography>
+          <Typography variant="h2">{carsA}</Typography>
         </Grid>
         <Grid item xs={6} style={{ textAlign: 'center' }}>
-          <div>B model</div>
-          <Typography variant="h2" component="h2">
-            {carsB}
-          </Typography>
+          <Typography variant="h5">B model</Typography>
+          <Typography variant="h2">{carsB}</Typography>
         </Grid>
       </Grid>
 
@@ -162,20 +162,9 @@ export default function Home() {
             <Button
               onClick={() => handleProduction('tires')}
               variant="contained"
-              disabled={staff === 0}
+              disabled={!staff}
             >
               Tires production
-            </Button>
-          </Tooltip>
-        </Grid>
-        <Grid item>
-          <Tooltip title={`${getTotalCapacity('engines')} / day`}>
-            <Button
-              onClick={() => handleProduction('engines')}
-              variant="contained"
-              disabled={staff === 0}
-            >
-              Engines production
             </Button>
           </Tooltip>
         </Grid>
@@ -184,7 +173,7 @@ export default function Home() {
             <Button
               onClick={() => handleProduction('doors')}
               variant="contained"
-              disabled={staff === 0}
+              disabled={!staff}
             >
               Doors production
             </Button>
@@ -195,9 +184,20 @@ export default function Home() {
             <Button
               onClick={() => handleProduction('chassis')}
               variant="contained"
-              disabled={staff === 0}
+              disabled={!staff}
             >
               Chassis production
+            </Button>
+          </Tooltip>
+        </Grid>
+        <Grid item>
+          <Tooltip title={`${getTotalCapacity('engines')} / day`}>
+            <Button
+              onClick={() => handleProduction('engines')}
+              variant="contained"
+              disabled={!staff}
+            >
+              Engines production
             </Button>
           </Tooltip>
         </Grid>
