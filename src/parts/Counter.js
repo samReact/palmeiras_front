@@ -1,5 +1,6 @@
 import { Badge, Grid, Typography } from '@mui/material'
-import { useContext } from 'react'
+import { Suspense, useContext } from 'react'
+import { useTranslation } from 'react-i18next'
 
 import { Context } from '../store/appReducer'
 import doorIcon from '../assets/img/car-door.png'
@@ -10,8 +11,11 @@ import engineIcon from '../assets/img/engine.png'
 export function Counter() {
   const [state] = useContext(Context)
   const { carsA, carsB, tires, doors, chassis, engines } = state
+
+  const { t } = useTranslation()
+
   return (
-    <>
+    <Suspense fallback="loading">
       <Grid
         container
         direction="row"
@@ -49,14 +53,14 @@ export function Counter() {
         style={{ marginTop: 40 }}
       >
         <Grid item xs={6} style={{ textAlign: 'center' }}>
-          <Typography variant="h5">A model</Typography>
+          <Typography variant="h5">{t('A model')}</Typography>
           <Typography variant="h2">{carsA}</Typography>
         </Grid>
         <Grid item xs={6} style={{ textAlign: 'center' }}>
-          <Typography variant="h5">B model</Typography>
+          <Typography variant="h5">{t('B model')}</Typography>
           <Typography variant="h2">{carsB}</Typography>
         </Grid>
       </Grid>
-    </>
+    </Suspense>
   )
 }

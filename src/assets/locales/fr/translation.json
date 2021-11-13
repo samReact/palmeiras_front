@@ -1,0 +1,18 @@
+{
+  "A model": "Modèle A",
+  "B model": "Modèle B",
+  "tires production": "Production de pneus",
+  "Doors production": "Production de portes",
+  "Engines production": "Production de moteurs",
+  "Chassis production": "Production de châssis",
+  "Model A car mounting": "Montage de voiture modèle A",
+  "Model B car mounting": "Montage de voiture modèle B",
+  "Model A car count": "Nbre de voitures modèle A",
+  "Model B car count": "Nbre de voitures modèle B",
+  "Staff Nbr": "Nbre d’employés",
+  "Product": "Produit",
+  "Quantity": "Quantité",
+  "Production date": "Date de production",
+  "no staff": "Pas d'employé en service !",
+  "History": "Historique"
+}

@@ -4,11 +4,14 @@ import { Grid, Tooltip, Button, Snackbar, Slide, Alert } from '@mui/material'
 import { Context } from '../store/appReducer'
 import { startCarProduction, startPartProduction } from '../store/actions'
 import { getTotalCapacity } from '../utils'
+import { useTranslation } from 'react-i18next'
 
 export function ProductionButtons() {
   const [state, dispatch] = useContext(Context)
   const [isOpen, setIsOpen] = useState(false)
   const { staff, carAcapacity, carBcapacity } = state
+
+  const { t } = useTranslation()
 
   const handleProduction = (model) => {
     if (!staff) {
@@ -27,7 +30,7 @@ export function ProductionButtons() {
         anchorOrigin={{ horizontal: 'right', vertical: 'top' }}
         key={Slide.name}
       >
-        <Alert severity="error">No staff available !</Alert>
+        <Alert severity="error">{t('no staff')}</Alert>
       </Snackbar>
       <Grid
         style={{ marginTop: '10%' }}
@@ -46,7 +49,7 @@ export function ProductionButtons() {
               onClick={() => handleProduction('tires')}
               variant="contained"
             >
-              Tires production
+              {t('tires production')}
             </Button>
           </Tooltip>
         </Grid>
@@ -59,7 +62,7 @@ export function ProductionButtons() {
               onClick={() => handleProduction('doors')}
               variant="contained"
             >
-              Doors production
+              {t('Doors production')}
             </Button>
           </Tooltip>
         </Grid>
@@ -72,7 +75,7 @@ export function ProductionButtons() {
               onClick={() => handleProduction('chassis')}
               variant="contained"
             >
-              Chassis production
+              {t('Chassis production')}
             </Button>
           </Tooltip>
         </Grid>
@@ -85,7 +88,7 @@ export function ProductionButtons() {
               onClick={() => handleProduction('engines')}
               variant="contained"
             >
-              Engines production
+              {t('Engines production')}
             </Button>
           </Tooltip>
         </Grid>
@@ -113,7 +116,7 @@ export function ProductionButtons() {
                 )
               }
             >
-              Cars A
+              {t('Model A car mounting')}
             </Button>
           </Tooltip>
         </Grid>
@@ -132,7 +135,7 @@ export function ProductionButtons() {
                 )
               }
             >
-              Cars B
+              {t('Model B car mounting')}
             </Button>
           </Tooltip>
         </Grid>

@@ -1,4 +1,4 @@
-import { useReducer } from 'react'
+import { Suspense, useReducer } from 'react'
 import { Route, Routes } from 'react-router-dom'
 
 import Home from './Home'
@@ -13,10 +13,12 @@ function App() {
   return (
     <Context.Provider value={[state, dispatch]}>
       <NavBar />
-      <Routes>
-        <Route path="/" element={<Home />} />
-        <Route path="/history" element={<History />} />
-      </Routes>
+      <Suspense fallback="loading">
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="/history" element={<History />} />
+        </Routes>
+      </Suspense>
     </Context.Provider>
   )
 }

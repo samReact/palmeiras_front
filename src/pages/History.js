@@ -8,6 +8,7 @@ import TableContainer from '@mui/material/TableContainer'
 import TableHead from '@mui/material/TableHead'
 import TableRow from '@mui/material/TableRow'
 import Paper from '@mui/material/Paper'
+import { useTranslation } from 'react-i18next'
 
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
   [`&.${tableCellClasses.head}`]: {
@@ -33,15 +34,19 @@ export default function History() {
   const [state] = useContext(Context)
   const { productionHistory } = state
 
+  const { t } = useTranslation()
+
   return (
     <TableContainer component={Paper}>
       <Table sx={{ minWidth: 700 }} aria-label="customized table">
         <TableHead>
           <TableRow>
-            <StyledTableCell>Product</StyledTableCell>
-            <StyledTableCell align="right">Quantity</StyledTableCell>
-            <StyledTableCell align="right">Total Employees</StyledTableCell>
-            <StyledTableCell align="right">Production Date</StyledTableCell>
+            <StyledTableCell>{t('Product')}</StyledTableCell>
+            <StyledTableCell align="right">{t('Quantity')}</StyledTableCell>
+            <StyledTableCell align="right">{t('Staff Nbr')}</StyledTableCell>
+            <StyledTableCell align="right">
+              {t('Production date')}
+            </StyledTableCell>
           </TableRow>
         </TableHead>
         <TableBody>

@@ -1,6 +1,7 @@
 import { useContext, useEffect } from 'react'
 import { Container, Fab, Grid, TextField } from '@mui/material'
 import RotateLeftIcon from '@mui/icons-material/RotateLeft'
+import { useTranslation } from 'react-i18next'
 
 import { Context } from '../store/appReducer'
 import { Counter } from '../parts/Counter'
@@ -13,8 +14,9 @@ import {
 
 export default function Home() {
   const [state, dispatch] = useContext(Context)
-
   const { staff, tires, doors, chassis, engines } = state
+
+  const { t } = useTranslation()
 
   useEffect(() => {
     setCarProductionCapacity(
@@ -52,7 +54,7 @@ export default function Home() {
         <Grid item style={{ justifySelf: 'center' }}>
           <TextField
             id="outlined-number"
-            label="Enter available staff"
+            label={t('Staff Nbr')}
             type="number"
             inputProps={{ min: 0 }}
             value={staff}
