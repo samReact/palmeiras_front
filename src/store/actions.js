@@ -9,11 +9,15 @@ import {
 } from './actions.constants'
 
 export const startPartProduction = (product, staff, dispatch) => {
+  const date = new Date()
+  const value = getTotalCapacity(product, staff)
+  const resume = { product, value, staff, date }
   dispatch({
     type: START_PART_PRODUCTION,
     payload: {
       name: product,
-      value: getTotalCapacity(product, staff),
+      value,
+      resume,
     },
   })
 }
@@ -22,6 +26,7 @@ export const startCarProduction = (
   product,
   carAcapacity,
   carBcapacity,
+  staff,
   dispatch,
 ) => {
   const deductableTires =
@@ -32,10 +37,14 @@ export const startCarProduction = (
     product === 'carsA' ? 2 * carAcapacity : 4 * carBcapacity
   const deductableChassis =
     product === 'carsA' ? 1 * carAcapacity : 1 * carBcapacity
+  const date = new Date()
+  const value = getTotalCapacity(product, staff)
+  const resume = { product, value, staff, date }
   dispatch({
     type: START_CAR_PRODUCTION,
     payload: {
       name: product,
+      resume,
       value: product === 'carsA' ? carAcapacity : carBcapacity,
       tires: deductableTires,
       chassis: deductableChassis,

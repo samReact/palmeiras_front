@@ -108,6 +108,7 @@ export function ProductionButtons() {
                   'carsA',
                   carAcapacity,
                   carBcapacity,
+                  staff,
                   dispatch,
                 )
               }
@@ -126,6 +127,7 @@ export function ProductionButtons() {
                   'carsB',
                   carAcapacity,
                   carBcapacity,
+                  staff,
                   dispatch,
                 )
               }

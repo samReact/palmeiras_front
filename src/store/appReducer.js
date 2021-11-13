@@ -18,6 +18,7 @@ export const initialState = {
   chassis: 0,
   carAcapacity: 0,
   carBcapacity: 0,
+  productionHistory: [],
 }
 
 export function reducer(state, action) {
@@ -29,6 +30,7 @@ export function reducer(state, action) {
       return {
         ...state,
         staff: '',
+        productionHistory: [...state.productionHistory, payload.resume],
         [payload.name]: parseFloat(
           (state[payload.name] + payload.value).toFixed(1),
         ),
@@ -37,6 +39,7 @@ export function reducer(state, action) {
       return {
         ...state,
         staff: '',
+        productionHistory: [...state.productionHistory, payload.resume],
         [payload.name]: state[payload.name] + payload.value,
         doors: parseFloat((state.doors - payload.doors).toFixed(1)),
         engines: parseFloat((state.engines - payload.engines).toFixed(1)),

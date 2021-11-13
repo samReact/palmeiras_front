@@ -1,5 +1,5 @@
 import { useContext, useEffect } from 'react'
-import { Fab, Grid, TextField } from '@mui/material'
+import { Container, Fab, Grid, TextField } from '@mui/material'
 import RotateLeftIcon from '@mui/icons-material/RotateLeft'
 
 import { Context } from '../store/appReducer'
@@ -39,7 +39,7 @@ export default function Home() {
   }, [chassis, doors, tires, engines, staff])
 
   return (
-    <>
+    <Container>
       <Counter />
       <ProductionButtons />
       <Grid
@@ -69,6 +69,6 @@ export default function Home() {
           <RotateLeftIcon />
         </Fab>
       </Grid>
-    </>
+    </Container>
   )
 }
