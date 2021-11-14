@@ -19,6 +19,7 @@ export const initialState = {
   carAcapacity: 0,
   carBcapacity: 0,
   productionHistory: [],
+  id: 0,
 }
 
 export function reducer(state, action) {
@@ -30,21 +31,29 @@ export function reducer(state, action) {
       return {
         ...state,
         staff: '',
-        productionHistory: [...state.productionHistory, payload.resume],
+        productionHistory: [
+          ...state.productionHistory,
+          { ...payload.resume, id: state.id },
+        ],
         [payload.name]: parseFloat(
           (state[payload.name] + payload.value).toFixed(1),
         ),
+        id: state.id + 1,
       }
     case START_CAR_PRODUCTION:
       return {
         ...state,
         staff: '',
-        productionHistory: [...state.productionHistory, payload.resume],
+        productionHistory: [
+          ...state.productionHistory,
+          { ...payload.resume, id: state.id },
+        ],
         [payload.name]: state[payload.name] + payload.value,
         doors: parseFloat((state.doors - payload.doors).toFixed(1)),
         engines: parseFloat((state.engines - payload.engines).toFixed(1)),
         chassis: parseFloat((state.chassis - payload.chassis).toFixed(1)),
         tires: parseFloat((state.tires - payload.tires).toFixed(1)),
+        id: state.id + 1,
       }
     case SET_CAR_A_CAPACITY:
       return {
@@ -60,9 +69,8 @@ export function reducer(state, action) {
       return {
         ...initialState,
       }
-
     default:
-      throw new Error()
+      return state
   }
 }
 

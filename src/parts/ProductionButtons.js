@@ -15,7 +15,7 @@ export function ProductionButtons() {
 
   const parts = [
     { name: 'tires', title: 'tires production' },
-    { name: 'doors', title: 'doors production' },
+    { name: 'doors', title: 'Doors production' },
     { name: 'chassis', title: 'Chassis production' },
     { name: 'engines', title: 'Engines production' },
   ]

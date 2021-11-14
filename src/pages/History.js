@@ -1,5 +1,5 @@
 import { useContext } from 'react'
-import { Context } from '../store/appReducer'
+import { useTranslation } from 'react-i18next'
 import { styled } from '@mui/material/styles'
 import Table from '@mui/material/Table'
 import TableBody from '@mui/material/TableBody'
@@ -8,7 +8,8 @@ import TableContainer from '@mui/material/TableContainer'
 import TableHead from '@mui/material/TableHead'
 import TableRow from '@mui/material/TableRow'
 import Paper from '@mui/material/Paper'
-import { useTranslation } from 'react-i18next'
+
+import { Context } from '../store/appReducer'
 
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
   [`&.${tableCellClasses.head}`]: {
@@ -51,7 +52,7 @@ export default function History() {
         </TableHead>
         <TableBody>
           {productionHistory.map((row) => (
-            <StyledTableRow key={row.product}>
+            <StyledTableRow key={row.id}>
               <StyledTableCell component="th" scope="row">
                 {row.product}
               </StyledTableCell>

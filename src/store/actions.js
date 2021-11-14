@@ -38,14 +38,14 @@ export const startCarProduction = (
   const deductableChassis =
     product === 'carsA' ? 1 * carAcapacity : 1 * carBcapacity
   const date = new Date()
-  const value = getTotalCapacity(product, staff)
+  const value = product === 'carsA' ? carAcapacity : carBcapacity
   const resume = { product, value, staff, date }
   dispatch({
     type: START_CAR_PRODUCTION,
     payload: {
       name: product,
       resume,
-      value: product === 'carsA' ? carAcapacity : carBcapacity,
+      value,
       tires: deductableTires,
       chassis: deductableChassis,
       doors: deductableDoors,
