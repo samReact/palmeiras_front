@@ -1,8 +1,8 @@
-import { render, screen } from '@testing-library/react'
-import App from '../App'
+import { render, screen } from './test-utils'
+import App from '../pages/App'
 
-test('renders learn react link', () => {
+test('renders two navigation link', () => {
   render(<App />)
-  const linkElement = screen.getByText(/learn react/i)
-  expect(linkElement).toBeInTheDocument()
+  const linkElement = screen.getAllByRole('link')
+  expect(linkElement).toHaveLength(2)
 })
