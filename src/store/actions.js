@@ -64,36 +64,33 @@ export const setCarProductionCapacity = (
   dispatch,
 ) => {
   const constraint = Math.min(engines, chassis)
-
-  let totalCapacity = getTotalCapacity(model, staff)
-
-  if (constraint < totalCapacity) totalCapacity = constraint
   const requireTires = model === 'carsA' ? 4 : 6
   const requireDoors = model === 'carsA' ? 2 : 4
 
-  const totalRequireTires = requireTires * totalCapacity
-  const totalRequireDoors = requireDoors * totalCapacity
-  if (
-    tires < requireTires ||
-    chassis < 1 ||
-    doors < requireDoors ||
-    engines < 1
-  ) {
-    return dispatch({
-      type: model === 'carsA' ? SET_CAR_A_CAPACITY : SET_CAR_B_CAPACITY,
-      payload: 0,
-    })
+  let finalResult = 0
+  let totalCapacity = getTotalCapacity(model, staff)
+
+  //check engines and chassis constraint
+  if (constraint < totalCapacity) totalCapacity = constraint
+
+  const getRequireDoors = (nbr) => {
+    return requireDoors * nbr
   }
-  let final = 0
+  const getRequireTires = (nbr) => {
+    return requireTires * nbr
+  }
 
   for (let i = 0; i <= totalCapacity; i++) {
-    if (tires >= totalRequireTires && doors >= totalRequireDoors) {
-      final = i
+    let requireTires = getRequireTires(i)
+    let requireDoors = getRequireDoors(i)
+    if (tires >= requireTires && doors >= requireDoors) {
+      finalResult = i
     }
   }
+
   return dispatch({
     type: model === 'carsA' ? SET_CAR_A_CAPACITY : SET_CAR_B_CAPACITY,
-    payload: final,
+    payload: finalResult,
   })
 }
 
