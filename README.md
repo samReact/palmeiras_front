@@ -3,7 +3,7 @@
 ### Running the project on dev mode
 
 1. Clone the repository
-   `https://github.com/samReact/palmeiras_front.git`
+   `git clone https://github.com/samReact/palmeiras_front.git`
 
 2. Go to the correct folder
    `cd palmeiras_front`
