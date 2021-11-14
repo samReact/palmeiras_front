@@ -53,7 +53,7 @@ export default function NavBar() {
                 label="Language"
                 onChange={handleChange}
               >
-                <MenuItem value={'en'}>EN</MenuItem>
+                <MenuItem value={'en-US'}>EN</MenuItem>
                 <MenuItem value={'fr'}>FR</MenuItem>
               </Select>
             </FormControl>

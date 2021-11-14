@@ -1,15 +1,24 @@
 import { useContext, useState } from 'react'
-import { Grid, Tooltip, Button, Snackbar, Slide, Alert } from '@mui/material'
+import { Grid, Snackbar, Slide, Alert } from '@mui/material'
 
 import { Context } from '../store/appReducer'
 import { startCarProduction, startPartProduction } from '../store/actions'
 import { getTotalCapacity } from '../utils'
 import { useTranslation } from 'react-i18next'
+import ProductionButtonItem from '../components/ProductionButtonItem'
+import { CarProductionButtonItem } from '../components/CarProductionButtonItem'
 
 export function ProductionButtons() {
   const [state, dispatch] = useContext(Context)
   const [isOpen, setIsOpen] = useState(false)
   const { staff, carAcapacity, carBcapacity } = state
+
+  const parts = [
+    { name: 'tires', title: 'tires production' },
+    { name: 'doors', title: 'doors production' },
+    { name: 'chassis', title: 'Chassis production' },
+    { name: 'engines', title: 'Engines production' },
+  ]
 
   const { t } = useTranslation()
 
@@ -19,7 +28,7 @@ export function ProductionButtons() {
     }
     startPartProduction(model, staff, dispatch)
   }
-
+  console.log('a', carAcapacity, 'b', carBcapacity)
   return (
     <>
       <Snackbar
@@ -40,58 +49,20 @@ export function ProductionButtons() {
         direction="row"
         spacing={4}
       >
-        <Grid item>
-          <Tooltip
-            title={!staff ? '' : `${getTotalCapacity('tires', staff)} / day`}
-            arrow
-          >
-            <Button
-              onClick={() => handleProduction('tires')}
-              variant="contained"
-            >
-              {t('tires production')}
-            </Button>
-          </Tooltip>
-        </Grid>
-        <Grid item>
-          <Tooltip
-            title={!staff ? '' : `${getTotalCapacity('doors', staff)} / day`}
-            arrow
-          >
-            <Button
-              onClick={() => handleProduction('doors')}
-              variant="contained"
-            >
-              {t('Doors production')}
-            </Button>
-          </Tooltip>
-        </Grid>
-        <Grid item>
-          <Tooltip
-            title={!staff ? '' : `${getTotalCapacity('chassis', staff)} / day`}
-            arrow
-          >
-            <Button
-              onClick={() => handleProduction('chassis')}
-              variant="contained"
-            >
-              {t('Chassis production')}
-            </Button>
-          </Tooltip>
-        </Grid>
-        <Grid item>
-          <Tooltip
-            title={!staff ? '' : `${getTotalCapacity('engines', staff)} / day`}
-            arrow
-          >
-            <Button
-              onClick={() => handleProduction('engines')}
-              variant="contained"
-            >
-              {t('Engines production')}
-            </Button>
-          </Tooltip>
-        </Grid>
+        {parts.map((part) => {
+          const { name, title } = part
+          return (
+            <Grid item key={name}>
+              <ProductionButtonItem
+                getTotalCapacity={getTotalCapacity}
+                handleProduction={handleProduction}
+                staff={staff}
+                part={name}
+                title={t(title)}
+              />
+            </Grid>
+          )
+        })}
       </Grid>
       <Grid
         style={{ marginTop: '2rem' }}
@@ -102,42 +73,28 @@ export function ProductionButtons() {
         spacing={4}
       >
         <Grid item>
-          <Tooltip title={carAcapacity === 0 ? '' : carAcapacity} arrow>
-            <Button
-              variant="contained"
-              disabled={carAcapacity === 0}
-              onClick={() =>
-                startCarProduction(
-                  'carsA',
-                  carAcapacity,
-                  carBcapacity,
-                  staff,
-                  dispatch,
-                )
-              }
-            >
-              {t('Model A car mounting')}
-            </Button>
-          </Tooltip>
+          <CarProductionButtonItem
+            carAcapacity={carAcapacity}
+            carBcapacity={carBcapacity}
+            startCarProduction={startCarProduction}
+            staff={staff}
+            title={t('Model A car mounting')}
+            capacity={carAcapacity}
+            model="carsA"
+            dispatch={dispatch}
+          />
         </Grid>
         <Grid item>
-          <Tooltip title={carBcapacity === 0 ? '' : carBcapacity} arrow>
-            <Button
-              variant="contained"
-              disabled={carBcapacity === 0}
-              onClick={() =>
-                startCarProduction(
-                  'carsB',
-                  carAcapacity,
-                  carBcapacity,
-                  staff,
-                  dispatch,
-                )
-              }
-            >
-              {t('Model B car mounting')}
-            </Button>
-          </Tooltip>
+          <CarProductionButtonItem
+            carAcapacity={carAcapacity}
+            carBcapacity={carBcapacity}
+            startCarProduction={startCarProduction}
+            staff={staff}
+            title={t('Model B car mounting')}
+            capacity={carBcapacity}
+            model="carsB"
+            dispatch={dispatch}
+          />
         </Grid>
       </Grid>
     </>
