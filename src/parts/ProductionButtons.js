@@ -28,7 +28,7 @@ export function ProductionButtons() {
     }
     startPartProduction(model, staff, dispatch)
   }
-  console.log('a', carAcapacity, 'b', carBcapacity)
+
   return (
     <>
       <Snackbar
