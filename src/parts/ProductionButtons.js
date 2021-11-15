@@ -59,6 +59,7 @@ export function ProductionButtons() {
                 staff={staff}
                 part={name}
                 title={t(title)}
+                datatestid={name}
               />
             </Grid>
           )

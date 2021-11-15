@@ -3,6 +3,6 @@ import { ProductionButtons } from '../parts/ProductionButtons'
 
 test('renders six buttons', () => {
   render(<ProductionButtons />)
-  const element = screen.getAllByTestId('production-button')
+  const element = screen.getAllByRole('button')
   expect(element).toHaveLength(6)
 })

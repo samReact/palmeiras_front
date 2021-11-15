@@ -24,7 +24,7 @@ export default function EmployeeInput() {
             id="outlined-number"
             label={t('Staff Nbr')}
             type="number"
-            inputProps={{ min: 0 }}
+            inputProps={{ min: 0, 'data-testid': 'employee-input' }}
             value={staff}
             onChange={(e) => setStaff(e, dispatch)}
           />

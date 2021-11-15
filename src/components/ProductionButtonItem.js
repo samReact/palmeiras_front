@@ -7,18 +7,18 @@ export default function ProductionButtonItem({
   staff,
   part,
   title,
+  datatestid,
 }) {
   const { t } = useTranslation()
+  const totalCapacity = getTotalCapacity(part, staff)
 
   return (
-    <Tooltip
-      title={!staff ? '' : `${getTotalCapacity(part, staff)} / ${t('day')}`}
-      arrow
-    >
+    <Tooltip title={!staff ? '' : `${totalCapacity} / ${t('day')}`} arrow>
       <Button
         onClick={() => handleProduction(part)}
         variant="contained"
-        data-testid="production-button"
+        data-testid={datatestid}
+        value={totalCapacity}
       >
         {title}
       </Button>
