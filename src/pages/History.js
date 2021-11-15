@@ -38,7 +38,7 @@ export default function History() {
   const { t } = useTranslation()
 
   return (
-    <TableContainer component={Paper}>
+    <TableContainer data-testid="history-page" component={Paper}>
       <Table sx={{ minWidth: 700 }} aria-label="customized table">
         <TableHead>
           <TableRow>

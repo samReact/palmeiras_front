@@ -32,7 +32,7 @@ export default function NavBar() {
       <AppBar position="static">
         <Toolbar>
           <Link to="/">
-            <img src={logo} alt="company icon" />
+            <img src={logo} alt="company logo" />
           </Link>
           <Box sx={{ flexGrow: 1 }}>
             <NavLink

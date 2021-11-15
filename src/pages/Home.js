@@ -34,7 +34,7 @@ export default function Home() {
   }, [chassis, doors, tires, engines, staff])
 
   return (
-    <Container>
+    <Container data-testid="home-page">
       <Counter />
       <ProductionButtons />
       <EmployeeInput />
