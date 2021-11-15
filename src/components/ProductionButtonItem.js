@@ -1,4 +1,5 @@
 import { Button, Tooltip } from '@mui/material'
+import { useTranslation } from 'react-i18next'
 
 export default function ProductionButtonItem({
   getTotalCapacity,
@@ -7,9 +8,11 @@ export default function ProductionButtonItem({
   part,
   title,
 }) {
+  const { t } = useTranslation()
+
   return (
     <Tooltip
-      title={!staff ? '' : `${getTotalCapacity(part, staff)} / day`}
+      title={!staff ? '' : `${getTotalCapacity(part, staff)} / ${t('day')}`}
       arrow
     >
       <Button
